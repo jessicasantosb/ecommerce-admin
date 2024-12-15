@@ -1,3 +1,8 @@
+'use client';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -13,13 +18,13 @@ import {
 import { Input } from '@/components/ui/input';
 import { Modal } from '@/components/ui/modal';
 import { useStoreModal } from '@/hooks/use-store-modal';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 const formSchema = z.object({
   name: z.string().min(1, { message: 'O nome é obrigatório' }),
 });
 
 export function StoreModal() {
+  const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onClose } = useStoreModal();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -28,7 +33,14 @@ export function StoreModal() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      setIsLoading(true);
+      await axios.post('/api/stores', { values });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -48,7 +60,11 @@ export function StoreModal() {
                   <FormItem>
                     <FormLabel>Nome</FormLabel>
                     <FormControl>
-                      <Input placeholder='Nome da Loja' {...field} />
+                      <Input
+                        disabled={isLoading}
+                        placeholder='Nome da Loja'
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -56,10 +72,14 @@ export function StoreModal() {
               />
 
               <div className='w-full pt-6 space-x-2 flex items-center justify-end'>
-                <Button type='button' variant={'outline'} onClick={onClose}>
+                <Button
+                  disabled={isLoading}
+                  type='button'
+                  variant={'outline'}
+                  onClick={onClose}>
                   Cancelar
                 </Button>
-                <Button type='submit'>
+                <Button disabled={isLoading} type='submit'>
                   Continuar
                 </Button>
               </div>
