@@ -18,6 +18,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Modal } from '@/components/ui/modal';
 import { useStoreModal } from '@/hooks/use-store-modal';
+import toast from 'react-hot-toast';
 
 const formSchema = z.object({
   name: z.string().min(1, { message: 'O nome é obrigatório' }),
@@ -36,8 +37,10 @@ export function StoreModal() {
     try {
       setIsLoading(true);
       await axios.post('/api/stores', { values });
+      toast.success('Loja criada com sucesso!');
     } catch (error) {
       console.log(error);
+      toast.error('Algo deu errado! Tente novamente!');
     } finally {
       setIsLoading(false);
     }
