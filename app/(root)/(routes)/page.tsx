@@ -10,9 +10,5 @@ export default function SetupPage() {
     if (!isOpen) onOpen();
   }, [isOpen, onOpen]);
 
-  return (
-    <main>
-      <h2 className='p-4'>Route Page!</h2>
-    </main>
-  );
+  return null;
 }
