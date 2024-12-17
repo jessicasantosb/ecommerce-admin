@@ -1,6 +1,8 @@
-import prisma from '@/lib/db';
-import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+import { auth } from '@clerk/nextjs/server';
+
+import { Header } from '@/components/header';
+import prisma from '@/lib/db';
 
 interface Props {
   children: React.ReactNode;
@@ -18,7 +20,7 @@ export default async function DashboardLayout({ children, params }: Props) {
 
   return (
     <main>
-      <nav>This will be a navbar</nav>
+      <Header />
       {children}
     </main>
   );
