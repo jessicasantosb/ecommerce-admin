@@ -28,3 +28,25 @@ export async function PATCH(
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: { storeId: string } },
+) {
+  try {
+    const { userId } = await auth();
+
+    if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
+    if (!params.storeId)
+      return new NextResponse('Store ID is required', { status: 400 });
+
+    const store = await prisma.store.deleteMany({
+      where: { id: params.storeId, userId },
+    });
+
+    return NextResponse.json(store);
+  } catch (error) {
+    console.log('[STORES_DELETE]', error.message);
+    return new NextResponse('Internal Server Error', { status: 500 });
+  }
+}
