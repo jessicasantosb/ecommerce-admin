@@ -2,21 +2,21 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Store } from '@prisma/client';
+import axios from 'axios';
 import { Trash } from 'lucide-react';
+import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { z } from 'zod';
 
-import { StoreFormField } from '@/components/store.form-field';
+import { StoreFormField } from '@/components/store-form-field';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { AlertModal } from '@/modals/alert-modal';
 import { formSchema } from '@/schemas/form-schema';
-import axios from 'axios';
-import { useParams, useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
 
 interface SettingFormProps {
   initialData: Store;

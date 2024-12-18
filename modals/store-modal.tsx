@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { StoreFormField } from '@/components/store.form-field';
+import { StoreFormField } from '@/components/store-form-field';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { Modal } from '@/components/ui/modal';
