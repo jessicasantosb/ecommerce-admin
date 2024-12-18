@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
+import { AlertModal } from '@/modals/alert-modal';
 import { formSchema } from '@/schemas/form-schema';
 import axios from 'axios';
 import { useParams, useRouter } from 'next/navigation';
@@ -27,7 +28,7 @@ export function SettingsForm({ initialData }: SettingFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
-  const router = useRouter();
+  const { refresh } = useRouter();
 
   const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
@@ -40,8 +41,8 @@ export function SettingsForm({ initialData }: SettingFormProps) {
       await axios.patch(`/api/stores/${params.storeId}`, {
         values,
       });
-      router.refresh();
-      toast.success('Loja atualizada!')
+      refresh();
+      toast.success('Loja atualizada!');
     } catch (error) {
       console.log(error);
       toast.error('Algo deu errado! Tente novamente!');
@@ -50,8 +51,28 @@ export function SettingsForm({ initialData }: SettingFormProps) {
     }
   };
 
+  const onDelete = async () => {
+    try {
+      setIsLoading(true);
+      await axios.delete(`/api/stores/${params.storeId}`);
+      refresh();
+      toast.success('Loja deletada!');
+    } catch (error) {
+      toast.error('Primeiro remova todas as categorias e produtos.');
+    } finally {
+      setIsLoading(false);
+      setIsOpen(false);
+    }
+  };
+
   return (
     <>
+      <AlertModal
+        isOpen={isOpen}
+        isLoading={isLoading}
+        onClose={() => setIsOpen(false)}
+        onConfirm={onDelete}
+      />
       <div className='flex items-center justify-between'>
         <Heading
           title='Configurações da Loja'
