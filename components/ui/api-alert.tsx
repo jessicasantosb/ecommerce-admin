@@ -1,7 +1,9 @@
 import { Copy, Server } from 'lucide-react';
-import { Alert, AlertDescription, AlertTitle } from './alert';
-import { Badge, BadgeProps } from './badge';
-import { Button } from './button';
+import toast from 'react-hot-toast';
+
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge, BadgeProps } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 interface ApiAlertProps {
   title: string;
@@ -24,6 +26,11 @@ export function ApiAlert({
   description,
   variant = 'public',
 }: ApiAlertProps) {
+  const onCopy = () => {
+    navigator.clipboard.writeText(description);
+    toast.success('A rota API foi copiada para a área de transferência!');
+  };
+
   return (
     <Alert>
       <Server className='size-4' />
@@ -36,7 +43,7 @@ export function ApiAlert({
         <code className='relative rounded px-[0.3rem] py-[0.2rem] font-mono font-semibold text-sm bg-muted'>
           {description}
         </code>
-        <Button variant={'outline'} size={'icon'}>
+        <Button variant={'outline'} size={'icon'} onClick={onCopy}>
           <Copy className='size-4' />
         </Button>
       </AlertDescription>

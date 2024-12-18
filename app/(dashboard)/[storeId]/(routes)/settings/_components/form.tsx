@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 import { z } from 'zod';
 
 import { StoreFormField } from '@/components/store-form-field';
+import { ApiAlert } from '@/components/ui/api-alert';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { Heading } from '@/components/ui/heading';
@@ -58,6 +59,8 @@ export function SettingsForm({ initialData }: SettingFormProps) {
       refresh();
       toast.success('Loja deletada!');
     } catch (error) {
+      console.log(error);
+
       toast.error('Primeiro remova todas as categorias e produtos.');
     } finally {
       setIsLoading(false);
@@ -101,6 +104,14 @@ export function SettingsForm({ initialData }: SettingFormProps) {
           </Button>
         </form>
       </Form>
+
+      <Separator />
+
+      <ApiAlert
+        title='NEXT_PUBLIC_API_URL'
+        description='test'
+        variant='public'
+      />
     </>
   );
 }
