@@ -13,6 +13,9 @@ import { Form } from '@/components/ui/form';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { formSchema } from '@/schemas/form-schema';
+import axios from 'axios';
+import { useParams, useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 interface SettingFormProps {
   initialData: Store;
@@ -23,14 +26,28 @@ type SettingFormValues = z.infer<typeof formSchema>;
 export function SettingsForm({ initialData }: SettingFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const params = useParams();
+  const router = useRouter();
 
   const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData,
   });
 
-  const onSubmit = (values: SettingFormValues) => {
-    console.log(values);
+  const onSubmit = async (values: SettingFormValues) => {
+    try {
+      setIsLoading(true);
+      await axios.patch(`/api/stores/${params.storeId}`, {
+        values,
+      });
+      router.refresh();
+      toast.success('Loja atualizada!')
+    } catch (error) {
+      console.log(error);
+      toast.error('Algo deu errado! Tente novamente!');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
