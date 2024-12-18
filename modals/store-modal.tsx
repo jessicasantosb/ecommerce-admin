@@ -6,34 +6,26 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { StoreFormField } from '@/components/store.form-field';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Form } from '@/components/ui/form';
 import { Modal } from '@/components/ui/modal';
 import { useStoreModal } from '@/hooks/use-store-modal';
+import { formSchema } from '@/schemas/form-schema';
 import toast from 'react-hot-toast';
 
-const formSchema = z.object({
-  name: z.string().min(1, { message: 'O nome é obrigatório' }),
-});
+type StoreModalFormValues = z.infer<typeof formSchema>;
 
 export function StoreModal() {
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen, onClose } = useStoreModal();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<StoreModalFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: '' },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: StoreModalFormValues) => {
     try {
       setIsLoading(true);
       const { data } = await axios.post('/api/stores', { values });
@@ -56,23 +48,7 @@ export function StoreModal() {
         <div className='space-y-4 py-2 pb-4'>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              <FormField
-                control={form.control}
-                name='name'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nome</FormLabel>
-                    <FormControl>
-                      <Input
-                        disabled={isLoading}
-                        placeholder='Nome da Loja'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <StoreFormField control={form.control} isLoading={isLoading} />
 
               <div className='w-full pt-6 space-x-2 flex items-center justify-end'>
                 <Button
@@ -89,8 +65,6 @@ export function StoreModal() {
             </form>
           </Form>
         </div>
-
-        <div className=''>A</div>
       </div>
     </Modal>
   );
