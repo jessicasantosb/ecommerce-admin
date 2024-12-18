@@ -1,0 +1,45 @@
+import { Copy, Server } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from './alert';
+import { Badge, BadgeProps } from './badge';
+import { Button } from './button';
+
+interface ApiAlertProps {
+  title: string;
+  description: string;
+  variant: 'public' | 'admin';
+}
+
+const textMap: Record<ApiAlertProps['variant'], string> = {
+  public: 'Public',
+  admin: 'Admin',
+};
+
+const variantMap: Record<ApiAlertProps['variant'], BadgeProps['variant']> = {
+  public: 'secondary',
+  admin: 'destructive',
+};
+
+export function ApiAlert({
+  title,
+  description,
+  variant = 'public',
+}: ApiAlertProps) {
+  return (
+    <Alert>
+      <Server className='size-4' />
+      <AlertTitle className='flex items-center gap-x-2'>
+        {title}
+
+        <Badge variant={variantMap[variant]}>{textMap[variant]}</Badge>
+      </AlertTitle>
+      <AlertDescription className='mt-4 flex items-center justify-between'>
+        <code className='relative rounded px-[0.3rem] py-[0.2rem] font-mono font-semibold text-sm bg-muted'>
+          {description}
+        </code>
+        <Button variant={'outline'} size={'icon'}>
+          <Copy className='size-4' />
+        </Button>
+      </AlertDescription>
+    </Alert>
+  );
+}
