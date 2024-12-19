@@ -6,17 +6,17 @@ import { getUserStoreByStoreId } from '@/lib/store';
 
 interface Props {
   children: React.ReactNode;
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }
 
 export default async function DashboardLayout({ children, params }: Props) {
   const { userId } = await auth();
   if (!userId) redirect('/sign-in');
 
-  const store = await getUserStoreByStoreId({
-    userId,
-    storeId: params.storeId,
-  });
+  const { storeId } = await params;
+
+  const store = await getUserStoreByStoreId({ userId, storeId });
+
   if (!store) redirect('/');
 
   return (
