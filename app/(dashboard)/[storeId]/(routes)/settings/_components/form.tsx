@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
+import { useOrigin } from '@/hooks/use-origin';
 import { AlertModal } from '@/modals/alert-modal';
 import { formSchema } from '@/schemas/form-schema';
 
@@ -29,6 +30,7 @@ export function SettingsForm({ initialData }: SettingFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
+  const origin = useOrigin();
   const { refresh } = useRouter();
 
   const form = useForm<SettingFormValues>({
