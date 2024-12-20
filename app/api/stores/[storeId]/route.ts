@@ -24,7 +24,7 @@ export async function PATCH(
 
     return NextResponse.json(store);
   } catch (error) {
-    console.log('[STORES_PATCH]', error.message);
+    if (error instanceof Error) console.log('[STORES_PATCH]', error.message);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
@@ -46,7 +46,7 @@ export async function DELETE(
 
     return NextResponse.json(store);
   } catch (error) {
-    console.log('[STORES_DELETE]', error.message);
+    if (error instanceof Error) console.log('[STORES_DELETE]', error.message);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
