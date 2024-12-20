@@ -4,9 +4,11 @@ import { BillboardForm } from './_components/form';
 export default async function BillboardPage({
   params,
 }: {
-  params: { billboardId: string };
+  params: Promise<{ billboardId: string }>;
 }) {
-  const billboard = await getBillboardById(params.billboardId);
+  const { billboardId } = await params;
+
+  const billboard = await getBillboardById(billboardId);
 
   return (
     <main className='flex flex-col'>
