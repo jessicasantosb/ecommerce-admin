@@ -20,6 +20,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Heading } from '@/components/ui/heading';
+import { ImageUpload } from '@/components/ui/image-upload';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { AlertModal } from '@/modals/alert-modal';
@@ -55,9 +56,19 @@ export function BillboardForm({ initialData }: SettingFormProps) {
   const onSubmit = async (values: SettingFormValues) => {
     try {
       setIsLoading(true);
-      await axios.patch(`/api/stores/${params.storeId}`, {
-        values,
-      });
+
+      if (initialData) {
+        await axios.patch(
+          `/api/${params.storeId}/billboards/${params.billboardId}`,
+          {
+            values,
+          },
+        );
+      } else {
+        await axios.post(`/api/${params.storeId}/billboards`, {
+          values,
+        });
+      }
       refresh();
       toast.success(toastMessage);
     } catch (error) {
@@ -71,13 +82,13 @@ export function BillboardForm({ initialData }: SettingFormProps) {
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}`);
+      await axios.delete(`/api/${params.storeId}/${params.billboardId}`);
       refresh();
       toast.success('Painel deletado!');
     } catch (error) {
       console.log(error);
 
-      toast.error('Primeiro remova todas as categorias e produtos.');
+      toast.error('Primeiro remova todas as categorias desse painel.');
     } finally {
       setIsLoading(false);
       setIsOpen(false);
@@ -111,6 +122,25 @@ export function BillboardForm({ initialData }: SettingFormProps) {
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className='w-full space-y-8'>
+          <FormField
+            control={form.control}
+            name='imageUrl'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Imagem de fundo</FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    value={field.value ? [field.value] : []}
+                    disabled={isLoading}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange('')}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <div className='grid grid-cols-3 gap-8'>
             <FormField
               control={form.control}
