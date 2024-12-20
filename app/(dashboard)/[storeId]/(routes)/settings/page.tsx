@@ -5,16 +5,18 @@ import { getUserStoreByStoreId } from '@/lib/store';
 import { SettingsForm } from './_components/form';
 
 interface SettingsPageProps {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }
 
 export default async function SettingsPage({ params }: SettingsPageProps) {
   const { userId } = await auth();
   if (!userId) redirect('/sign-in');
 
+  const { storeId } = await params;
+
   const store = await getUserStoreByStoreId({
     userId,
-    storeId: params.storeId,
+    storeId: storeId,
   });
   if (!store) redirect('/');
 
