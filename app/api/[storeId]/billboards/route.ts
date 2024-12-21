@@ -40,3 +40,23 @@ export async function POST(
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
+
+export async function GET(
+  req: Request,
+  { params }: { params: { storeId: string } },
+) {
+  try {
+    if (!params.storeId) {
+      return new NextResponse('Store id is required', { status: 400 });
+    }
+
+    const billboards = await prisma.billboard.findMany({
+      where: { storeId: params.storeId },
+    });
+
+    return NextResponse.json(billboards);
+  } catch (error) {
+    if (error instanceof Error) console.log('[BILLBOARDS_GET]', error.message);
+    return new NextResponse('Internal Server Error', { status: 500 });
+  }
+}
