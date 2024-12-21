@@ -36,7 +36,7 @@ export function BillboardForm({ initialData }: SettingFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
-  const { refresh } = useRouter();
+  const { push } = useRouter();
 
   const title = initialData ? 'Editar Painel' : 'Criar Painel';
   const description = initialData
@@ -69,7 +69,7 @@ export function BillboardForm({ initialData }: SettingFormProps) {
           values,
         });
       }
-      refresh();
+      push(`/${params.storeId}/billboards`);
       toast.success(toastMessage);
     } catch (error) {
       console.log(error);
