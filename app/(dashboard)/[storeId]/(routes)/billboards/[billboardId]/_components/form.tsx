@@ -36,7 +36,7 @@ export function BillboardForm({ initialData }: SettingFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
-  const { push } = useRouter();
+  const { refresh, push } = useRouter();
 
   const title = initialData ? 'Editar Painel' : 'Criar Painel';
   const description = initialData
