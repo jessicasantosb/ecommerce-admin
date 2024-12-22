@@ -5,3 +5,10 @@ export const getBillboardById = async (billboardId: string) => {
     where: { id: billboardId },
   });
 };
+
+export const getBillboards = async (storeId: string) => {
+  return await prisma.billboard.findMany({
+    where: { storeId },
+    orderBy: { createdAt: 'desc' },
+  });
+};
