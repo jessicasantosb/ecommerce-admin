@@ -32,7 +32,7 @@ export function BillboardClient({ data }: BillboardClientProps) {
       </div>
       <Separator />
 
-      <DataTable data={data} columns={columns} />
+      <DataTable searchKey='label' data={data} columns={columns} />
     </>
   );
 }
