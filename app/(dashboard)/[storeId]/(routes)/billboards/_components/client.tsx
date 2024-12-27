@@ -1,12 +1,19 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Heading } from '@/components/ui/heading';
-import { Separator } from '@/components/ui/separator';
 import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 
-export function BillboardClient() {
+import { Button } from '@/components/ui/button';
+import { Heading } from '@/components/ui/heading';
+import { Separator } from '@/components/ui/separator';
+
+import { BillboardColumn } from './columns';
+
+interface BillboardClientProps {
+  data: BillboardColumn[];
+}
+
+export function BillboardClient({ data }: BillboardClientProps) {
   const { push } = useRouter();
   const { storeId } = useParams();
 
@@ -14,7 +21,7 @@ export function BillboardClient() {
     <>
       <div className='flex items-center justify-between'>
         <Heading
-          title='Painel (0)'
+          title={`Painel (${data.length})`}
           description='Gerencie os painéis para a sua loja.'
         />
         <Button onClick={() => push(`/${storeId}/billboards/new`)}>

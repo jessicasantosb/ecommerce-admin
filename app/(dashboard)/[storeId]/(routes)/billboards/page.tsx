@@ -1,10 +1,29 @@
-import { BillboardClient } from './_components/client';
+import { format } from 'date-fns';
 
-export default function BillboardPage() {
+import { getBillboards } from '@/lib/billboard';
+
+import { BillboardClient } from './_components/client';
+import { BillboardColumn } from './_components/columns';
+
+interface BillboardPageProps {
+  params: Promise<{ storeId: string }>;
+}
+
+export default async function BillboardPage({ params }: BillboardPageProps) {
+  const { storeId } = await params;
+
+  const billboards = await getBillboards(storeId);
+
+  const formatedBillboard: BillboardColumn[] = billboards.map((item) => ({
+    id: item.id,
+    label: item.label,
+    createdAt: format(item.createdAt, 'MMMM do, yyyy'),
+  }));
+
   return (
     <main className='flex flex-col'>
       <div className='space-y-4 p-8 pt-6 flex-1'>
-        <BillboardClient />
+        <BillboardClient data={formatedBillboard} />
       </div>
     </main>
   );
