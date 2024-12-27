@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 import { getBillboards } from '@/lib/billboard';
 
@@ -17,7 +18,9 @@ export default async function BillboardPage({ params }: BillboardPageProps) {
   const formatedBillboard: BillboardColumn[] = billboards.map((item) => ({
     id: item.id,
     label: item.label,
-    createdAt: format(item.createdAt, 'MMMM do, yyyy'),
+    createdAt: format(item.createdAt, "dd 'de' MMMM', ' yyyy", {
+      locale: ptBR,
+    }),
   }));
 
   return (
