@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { onCopy } from '@/utils/on-copy';
 
+import { useParams, useRouter } from 'next/navigation';
 import { BillboardColumn } from './columns';
 
 interface CellActionProps {
@@ -19,6 +20,8 @@ interface CellActionProps {
 }
 
 export function CellAction({ data }: CellActionProps) {
+  const { push } = useRouter();
+  const { storeId } = useParams();
 
   return (
     <DropdownMenu>
@@ -35,7 +38,8 @@ export function CellAction({ data }: CellActionProps) {
           <Copy className='size-4 mr-2' />
           Copiar ID
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => push(`/${storeId}/billboards/${data.id}`)}>
           <Edit className='size-4 mr-2' />
           Editar
         </DropdownMenuItem>
