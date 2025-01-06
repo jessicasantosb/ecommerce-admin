@@ -82,8 +82,11 @@ export function BillboardForm({ initialData }: SettingFormProps) {
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/${params.storeId}/${params.billboardId}`);
+      await axios.delete(
+        `/api/${params.storeId}/billboards/${params.billboardId}`,
+      );
       refresh();
+      push(`/${params.storeId}/billboards`);
       toast.success('Painel deletado!');
     } catch (error) {
       console.log(error);
