@@ -168,8 +168,6 @@ export function BillboardForm({ initialData }: SettingFormProps) {
           </Button>
         </form>
       </Form>
-
-      <Separator />
     </>
   );
 }
