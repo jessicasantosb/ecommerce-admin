@@ -10,6 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { onCopy } from '@/utils/on-copy';
 
 import { BillboardColumn } from './columns';
 
@@ -18,7 +19,6 @@ interface CellActionProps {
 }
 
 export function CellAction({ data }: CellActionProps) {
-  console.log(data);
 
   return (
     <DropdownMenu>
@@ -31,7 +31,7 @@ export function CellAction({ data }: CellActionProps) {
 
       <DropdownMenuContent align='end'>
         <DropdownMenuLabel>Ações</DropdownMenuLabel>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onCopy(data.id)}>
           <Copy className='size-4 mr-2' />
           Copiar ID
         </DropdownMenuItem>
