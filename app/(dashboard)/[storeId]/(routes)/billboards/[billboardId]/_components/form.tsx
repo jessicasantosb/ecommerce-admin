@@ -26,13 +26,13 @@ import { Separator } from '@/components/ui/separator';
 import { AlertModal } from '@/modals/alert-modal';
 import { billboardFormSchema } from '@/schemas/form-schema';
 
-interface SettingFormProps {
+interface BillboardFormProps {
   initialData: Billboard | null;
 }
 
-type SettingFormValues = z.infer<typeof billboardFormSchema>;
+type BillboardFormValues = z.infer<typeof billboardFormSchema>;
 
-export function BillboardForm({ initialData }: SettingFormProps) {
+export function BillboardForm({ initialData }: BillboardFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
@@ -45,7 +45,7 @@ export function BillboardForm({ initialData }: SettingFormProps) {
   const toastMessage = initialData ? 'Painel atualizado!' : 'Painel criado!';
   const action = initialData ? 'Salvar mudanças' : 'Criar';
 
-  const form = useForm<SettingFormValues>({
+  const form = useForm<BillboardFormValues>({
     resolver: zodResolver(billboardFormSchema),
     defaultValues: initialData || {
       label: '',
@@ -53,7 +53,7 @@ export function BillboardForm({ initialData }: SettingFormProps) {
     },
   });
 
-  const onSubmit = async (values: SettingFormValues) => {
+  const onSubmit = async (values: BillboardFormValues) => {
     try {
       setIsLoading(true);
 
