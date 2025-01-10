@@ -14,7 +14,7 @@ interface ApiAlertProps {
 }
 
 const textMap: Record<ApiAlertProps['variant'], string> = {
-  public: 'Public',
+  public: 'Público',
   admin: 'Admin',
 };
 
