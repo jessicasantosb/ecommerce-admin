@@ -95,7 +95,7 @@ export function CategoryForm({ initialData, billboards }: CategoryFormProps) {
     } catch (error) {
       console.log(error);
 
-      toast.error('Primeiro remova todas os produtos dessa categoria.');
+      toast.error('Primeiro remova todos os produtos dessa categoria.');
     } finally {
       setIsLoading(false);
       setIsOpen(false);
