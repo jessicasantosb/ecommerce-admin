@@ -7,3 +7,9 @@ export const getCategories = async (storeId: string) => {
     orderBy: { createdAt: 'desc' },
   });
 };
+
+export const getCategoryById = async (categoryId: string) => {
+  return await prisma.category.findUnique({
+    where: { id: categoryId },
+  });
+};
