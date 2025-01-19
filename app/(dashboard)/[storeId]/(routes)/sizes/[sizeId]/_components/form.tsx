@@ -34,7 +34,7 @@ type SizeFormValues = z.infer<typeof sizeFormSchema>;
 export function SizeForm({ initialData }: SizeFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const params = useParams();
+  const { storeId, sizeId } = useParams();
   const { refresh, push } = useRouter();
 
   const title = initialData ? 'Editar Tamanho' : 'Criar Tamanho';
@@ -57,15 +57,15 @@ export function SizeForm({ initialData }: SizeFormProps) {
       setIsLoading(true);
 
       if (initialData) {
-        await axios.patch(`/api/${params.storeId}/sizes/${params.sizeId}`, {
+        await axios.patch(`/api/${storeId}/sizes/${sizeId}`, {
           values,
         });
       } else {
-        await axios.post(`/api/${params.storeId}/sizes`, {
+        await axios.post(`/api/${storeId}/sizes`, {
           values,
         });
       }
-      push(`/${params.storeId}/sizes`);
+      push(`/${storeId}/sizes`);
       toast.success(toastMessage);
     } catch (error) {
       console.log(error);
@@ -78,9 +78,9 @@ export function SizeForm({ initialData }: SizeFormProps) {
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`);
+      await axios.delete(`/api/${storeId}/sizes/${sizeId}`);
       refresh();
-      push(`/${params.storeId}/sizes`);
+      push(`/${storeId}/sizes`);
       toast.success('Tamanho deletado!');
     } catch (error) {
       console.log(error);
@@ -119,7 +119,6 @@ export function SizeForm({ initialData }: SizeFormProps) {
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className='w-full space-y-8'>
-
           <div className='grid grid-cols-3 gap-8'>
             <FormField
               control={form.control}
