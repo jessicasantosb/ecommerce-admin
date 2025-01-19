@@ -84,7 +84,7 @@ export async function DELETE(
 
     return NextResponse.json(billboard);
   } catch (error) {
-    if (error instanceof Error) console.log('[BILLBOARD_PATCH]', error.message);
+    if (error instanceof Error) console.log('[BILLBOARD_DELETE]', error.message);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
