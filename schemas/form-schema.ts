@@ -17,5 +17,4 @@ export const categoryFormSchema = z.object({
 export const sizeFormSchema = z.object({
   name: z.string().min(1, { message: 'O nome é obrigatório' }),
   value: z.string().min(1, { message: 'O tamanho é obrigatório' }),
-  sizeId: z.string().min(1, { message: 'O id do tamanho é obrigatório' }),
 });
