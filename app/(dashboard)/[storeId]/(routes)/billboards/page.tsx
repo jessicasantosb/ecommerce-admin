@@ -10,7 +10,7 @@ interface BillboardPageProps {
   params: Promise<{ storeId: string }>;
 }
 
-export default async function BillboardPage({ params }: BillboardPageProps) {
+export default async function BillboardsPage({ params }: BillboardPageProps) {
   const { storeId } = await params;
 
   const billboards = await getBillboards(storeId);
