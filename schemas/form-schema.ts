@@ -23,7 +23,7 @@ export const colorFormSchema = z.object({
   name: z.string().min(1, { message: 'O nome é obrigatório' }),
   value: z
     .string()
-    .min(4, { message: 'A cor é obrigatória' })
+    .min(4, { message: 'A cor fornecida não é um código hexadecimal válido' })
     .regex(/^#/, {
       message: 'A cor fornecida não é um código hexadecimal válido',
     }),
