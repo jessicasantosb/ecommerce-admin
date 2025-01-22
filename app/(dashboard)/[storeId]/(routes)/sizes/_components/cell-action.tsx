@@ -1,7 +1,7 @@
 'use client';
 
-import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import axios from 'axios';
+import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -14,7 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { onCopy } from '@/utils/on-copy';
+import { onCopy } from '@/lib/utils';
 import { AlertModal } from '@/modals/alert-modal';
 
 import { SizeColumn } from './columns';

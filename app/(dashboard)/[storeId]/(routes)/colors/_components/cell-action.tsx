@@ -14,8 +14,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { onCopy } from '@/lib/utils';
 import { AlertModal } from '@/modals/alert-modal';
-import { onCopy } from '@/utils/on-copy';
 
 import { ColorColumn } from './columns';
 

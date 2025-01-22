@@ -5,7 +5,7 @@ import { Copy, Server } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge, BadgeProps } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { onCopy } from '@/utils/on-copy';
+import { onCopy } from '@/lib/utils';
 
 interface ApiAlertProps {
   title: string;
@@ -40,7 +40,10 @@ export function ApiAlert({
         <code className='relative rounded px-[0.3rem] py-[0.2rem] font-mono font-semibold text-sm bg-muted'>
           {description}
         </code>
-        <Button variant={'outline'} size={'icon'} onClick={() => onCopy(description)}>
+        <Button
+          variant={'outline'}
+          size={'icon'}
+          onClick={() => onCopy(description)}>
           <Copy className='size-4' />
         </Button>
       </AlertDescription>
