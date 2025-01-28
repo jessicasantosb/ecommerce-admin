@@ -28,3 +28,17 @@ export const colorFormSchema = z.object({
       message: 'A cor fornecida não é um código hexadecimal válido',
     }),
 });
+
+export const productFormSchema = z.object({
+  name: z.string().min(1, { message: 'O nome é obrigatório' }),
+  images: z
+    .object({ url: z.string().nonempty('A url é obrigatória') })
+    .array()
+    .nonempty('É necessário fornecer pelo menos uma imagem'),
+  price: z.coerce.number().min(1, { message: 'O preço é obrigatório' }),
+  categoryId: z.string().min(1, { message: 'O id da categoria é obrigatório' }),
+  colorId: z.string().min(1, { message: 'O id da cor é obrigatório' }),
+  sizeId: z.string().min(1, { message: 'O id do tamanho é obrigatório' }),
+  isFeatured: z.boolean().default(false),
+  isArchived: z.boolean().default(false),
+});
