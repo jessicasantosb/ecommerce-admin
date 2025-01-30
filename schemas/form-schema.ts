@@ -36,9 +36,9 @@ export const productFormSchema = z.object({
     .array()
     .nonempty('É necessário fornecer pelo menos uma imagem'),
   price: z.coerce.number().min(1, { message: 'O preço é obrigatório' }),
-  categoryId: z.string().min(1, { message: 'O id da categoria é obrigatório' }),
-  colorId: z.string().min(1, { message: 'O id da cor é obrigatório' }),
-  sizeId: z.string().min(1, { message: 'O id do tamanho é obrigatório' }),
+  categoryId: z.string().min(1, { message: 'A categoria é obrigatória' }),
+  colorId: z.string().min(1, { message: 'A cor é obrigatória' }),
+  sizeId: z.string().min(1, { message: 'O tamanho é obrigatório' }),
   isFeatured: z.boolean().default(false),
   isArchived: z.boolean().default(false),
 });
