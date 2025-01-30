@@ -337,7 +337,7 @@ export function ProductForm({
                     />
                   </FormControl>
                   <div className='space-y-1 leading-none'>
-                    <FormLabel>Arquivado</FormLabel>
+                    <FormLabel>Arquivar</FormLabel>
                     <FormDescription>
                       Esse produto não aparecerá na loja
                     </FormDescription>
