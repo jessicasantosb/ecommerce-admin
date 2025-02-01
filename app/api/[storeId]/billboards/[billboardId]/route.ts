@@ -36,7 +36,7 @@ export async function PATCH(
     if (!imageUrl)
       return new NextResponse('Image url is required', { status: 400 });
     if (!params.billboardId) {
-      return new NextResponse('Store id is required', { status: 400 });
+      return new NextResponse('Billboard id is required', { status: 400 });
     }
 
     const storeByUserId = await prisma.store.findFirst({
