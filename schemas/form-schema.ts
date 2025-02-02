@@ -35,7 +35,9 @@ export const productFormSchema = z.object({
     .object({ url: z.string().nonempty('A url é obrigatória') })
     .array()
     .nonempty('É necessário fornecer pelo menos uma imagem'),
-  price: z.coerce.number().min(1, { message: 'O preço é obrigatório' }),
+  price: z.coerce
+    .number({ message: 'Digite um número válido' })
+    .min(1, { message: 'O preço é obrigatório' }),
   categoryId: z.string().min(1, { message: 'A categoria é obrigatória' }),
   colorId: z.string().min(1, { message: 'A cor é obrigatória' }),
   sizeId: z.string().min(1, { message: 'O tamanho é obrigatório' }),
