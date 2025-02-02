@@ -32,9 +32,12 @@ export async function PATCH(
     const { name, billboardId } = body.values;
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!name) return new NextResponse('Name is required', { status: 400 });
-    if (!billboardId)
-      return new NextResponse('Billboard id is required', { status: 400 });
+
+    for (const value in body.values) {
+      if (!value)
+        return new NextResponse(`${value} is required`, { status: 400 });
+    }
+
     if (!params.categoryId) {
       return new NextResponse('Category id is required', { status: 400 });
     }

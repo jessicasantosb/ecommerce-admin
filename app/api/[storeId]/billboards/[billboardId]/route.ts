@@ -32,9 +32,12 @@ export async function PATCH(
     const { label, imageUrl } = body.values;
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!label) return new NextResponse('Label is required', { status: 400 });
-    if (!imageUrl)
-      return new NextResponse('Image url is required', { status: 400 });
+
+    for (const value in body.values) {
+      if (!value)
+        return new NextResponse(`${value} is required`, { status: 400 });
+    }
+
     if (!params.billboardId) {
       return new NextResponse('Billboard id is required', { status: 400 });
     }
@@ -84,7 +87,8 @@ export async function DELETE(
 
     return NextResponse.json(billboard);
   } catch (error) {
-    if (error instanceof Error) console.log('[BILLBOARD_DELETE]', error.message);
+    if (error instanceof Error)
+      console.log('[BILLBOARD_DELETE]', error.message);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

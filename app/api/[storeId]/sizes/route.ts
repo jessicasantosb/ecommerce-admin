@@ -16,8 +16,11 @@ export async function POST(
     console.log('name, value', name, value);
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!name) return new NextResponse('Name is required', { status: 400 });
-    if (!value) return new NextResponse('Size is required', { status: 400 });
+
+    for (const value in body.values) {
+      if (!value)
+        return new NextResponse(`${value} is required`, { status: 400 });
+    }
 
     if (!params.storeId) {
       return new NextResponse('Store id is required', { status: 400 });

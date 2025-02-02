@@ -23,19 +23,10 @@ export async function POST(
     } = body.values;
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!name) return new NextResponse('Name is required', { status: 400 });
-    if (!price) return new NextResponse('Price is required', { status: 400 });
-    if (!images || !images.length) {
-      return new NextResponse('Images are required', { status: 400 });
-    }
-    if (!categoryId) {
-      return new NextResponse('Category id is required', { status: 400 });
-    }
-    if (!sizeId) {
-      return new NextResponse('Size id is required', { status: 400 });
-    }
-    if (!colorId) {
-      return new NextResponse('Color id is required', { status: 400 });
+
+    for (const value in body.values) {
+      if (!value)
+        return new NextResponse(`${value} is required`, { status: 400 });
     }
 
     if (!params.storeId) {

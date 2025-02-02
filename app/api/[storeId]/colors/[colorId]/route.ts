@@ -32,8 +32,12 @@ export async function PATCH(
     const { name, value } = body.values;
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!name) return new NextResponse('Name is required', { status: 400 });
-    if (!value) return new NextResponse('Value is required', { status: 400 });
+
+    for (const value in body.values) {
+      if (!value)
+        return new NextResponse(`${value} is required`, { status: 400 });
+    }
+
     if (!params.colorId) {
       return new NextResponse('Color id is required', { status: 400 });
     }
