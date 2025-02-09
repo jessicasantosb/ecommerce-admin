@@ -4,14 +4,16 @@ import { NextResponse } from 'next/server';
 
 export async function GET(
   _req: Request,
-  { params }: { params: { categoryId: string } },
+  { params }: { params: Promise<{ categoryId: string }> },
 ) {
+  const { categoryId } = await params;
+
   try {
-    if (!params.categoryId)
+    if (!categoryId)
       return new NextResponse('Category id is required', { status: 400 });
 
     const category = await prisma.category.findUnique({
-      where: { id: params.categoryId },
+      where: { id: categoryId },
     });
 
     return NextResponse.json(category);
@@ -23,8 +25,10 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; categoryId: string } },
+  { params }: { params: Promise<{ categoryId: string; storeId: string }> },
 ) {
+  const { categoryId, storeId } = await params;
+
   try {
     const { userId } = await auth();
     const body = await req.json();
@@ -38,12 +42,12 @@ export async function PATCH(
         return new NextResponse(`${value} is required`, { status: 400 });
     }
 
-    if (!params.categoryId) {
+    if (!categoryId) {
       return new NextResponse('Category id is required', { status: 400 });
     }
 
     const storeByUserId = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
     });
 
     if (!storeByUserId) {
@@ -51,7 +55,7 @@ export async function PATCH(
     }
 
     const category = await prisma.category.updateMany({
-      where: { id: params.categoryId },
+      where: { id: categoryId },
       data: { name, billboardId },
     });
 
@@ -64,17 +68,19 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { storeId: string; categoryId: string } },
+  { params }: { params: Promise<{ categoryId: string; storeId: string }> },
 ) {
+  const { categoryId, storeId } = await params;
+  
   try {
     const { userId } = await auth();
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!params.categoryId)
+    if (!categoryId)
       return new NextResponse('Category id is required', { status: 400 });
 
     const storeByUserId = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
     });
 
     if (!storeByUserId) {
@@ -82,7 +88,7 @@ export async function DELETE(
     }
 
     const category = await prisma.category.deleteMany({
-      where: { id: params.categoryId },
+      where: { id: categoryId },
     });
 
     return NextResponse.json(category);

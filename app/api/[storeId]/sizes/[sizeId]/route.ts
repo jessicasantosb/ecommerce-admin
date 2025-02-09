@@ -4,14 +4,16 @@ import { NextResponse } from 'next/server';
 
 export async function GET(
   _req: Request,
-  { params }: { params: { sizeId: string } },
+  { params }: { params: Promise<{ sizeId: string }> },
 ) {
+  const { sizeId } = await params;
+
   try {
-    if (!params.sizeId)
+    if (!sizeId)
       return new NextResponse('Size id is required', { status: 400 });
 
     const size = await prisma.size.findUnique({
-      where: { id: params.sizeId },
+      where: { id: sizeId },
     });
 
     return NextResponse.json(size);
@@ -23,8 +25,10 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; sizeId: string } },
+  { params }: { params: Promise<{ storeId: string; sizeId: string }> },
 ) {
+  const { storeId, sizeId } = await params;
+
   try {
     const { userId } = await auth();
     const body = await req.json();
@@ -38,12 +42,12 @@ export async function PATCH(
         return new NextResponse(`${value} is required`, { status: 400 });
     }
 
-    if (!params.sizeId) {
+    if (!sizeId) {
       return new NextResponse('Size id is required', { status: 400 });
     }
 
     const storeByUserId = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
     });
 
     if (!storeByUserId) {
@@ -51,7 +55,7 @@ export async function PATCH(
     }
 
     const size = await prisma.size.updateMany({
-      where: { id: params.sizeId },
+      where: { id: sizeId },
       data: { name, value },
     });
 
@@ -64,17 +68,19 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { storeId: string; sizeId: string } },
+  { params }: { params: Promise<{ storeId: string; sizeId: string }> },
 ) {
+  const { storeId, sizeId } = await params;
+  
   try {
     const { userId } = await auth();
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!params.sizeId)
+    if (!sizeId)
       return new NextResponse('Size id is required', { status: 400 });
 
     const storeByUserId = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
     });
 
     if (!storeByUserId) {
@@ -82,7 +88,7 @@ export async function DELETE(
     }
 
     const size = await prisma.size.deleteMany({
-      where: { id: params.sizeId },
+      where: { id: sizeId },
     });
 
     return NextResponse.json(size);

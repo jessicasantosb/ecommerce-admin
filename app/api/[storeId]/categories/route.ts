@@ -5,8 +5,10 @@ import prisma from '@/lib/db';
 
 export async function POST(
   req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<{ storeId: string }> },
 ) {
+  const { storeId } = await params;
+
   try {
     const { userId } = await auth();
     const body = await req.json();
@@ -20,12 +22,12 @@ export async function POST(
         return new NextResponse(`${value} is required`, { status: 400 });
     }
 
-    if (!params.storeId) {
+    if (!storeId) {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
     const storeByUserId = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
     });
 
     if (!storeByUserId) {
@@ -33,7 +35,7 @@ export async function POST(
     }
 
     const category = await prisma.category.create({
-      data: { name, billboardId, storeId: params.storeId },
+      data: { name, billboardId, storeId: storeId },
     });
 
     return NextResponse.json(category);
@@ -45,15 +47,17 @@ export async function POST(
 
 export async function GET(
   req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<{ storeId: string }> },
 ) {
+  const { storeId } = await params;
+
   try {
-    if (!params.storeId) {
+    if (!storeId) {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
     const categories = await prisma.category.findMany({
-      where: { storeId: params.storeId },
+      where: { storeId: storeId },
     });
 
     return NextResponse.json(categories);

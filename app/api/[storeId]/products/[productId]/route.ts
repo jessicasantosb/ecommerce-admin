@@ -4,14 +4,16 @@ import { NextResponse } from 'next/server';
 
 export async function GET(
   _req: Request,
-  { params }: { params: { productId: string } },
+  { params }: { params: Promise<{ productId: string }> },
 ) {
+  const { productId } = await params;
+
   try {
-    if (!params.productId)
+    if (!productId)
       return new NextResponse('Product id is required', { status: 400 });
 
     const product = await prisma.product.findUnique({
-      where: { id: params.productId },
+      where: { id: productId },
       include: {
         images: true,
         category: true,
@@ -29,8 +31,10 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; productId: string } },
+  { params }: { params: Promise<{ storeId: string; productId: string }> },
 ) {
+  const { storeId, productId } = await params;
+
   try {
     const { userId } = await auth();
     const body = await req.json();
@@ -53,12 +57,12 @@ export async function PATCH(
         return new NextResponse(`${value} is required`, { status: 400 });
     }
 
-    if (!params.productId) {
+    if (!productId) {
       return new NextResponse('productId id is required', { status: 400 });
     }
 
     const storeByUserId = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
     });
 
     if (!storeByUserId) {
@@ -66,7 +70,7 @@ export async function PATCH(
     }
 
     await prisma.product.update({
-      where: { id: params.productId },
+      where: { id: productId },
       data: {
         name,
         price,
@@ -83,7 +87,7 @@ export async function PATCH(
 
     const product = await prisma.product.update({
       where: {
-        id: params.productId,
+        id: productId,
       },
       data: {
         images: {
@@ -103,17 +107,18 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { storeId: string; productId: string } },
+  { params }: { params: Promise<{ storeId: string; productId: string }> },
 ) {
+  const { storeId, productId } = await params;
   try {
     const { userId } = await auth();
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!params.productId)
+    if (!productId)
       return new NextResponse('Product id is required', { status: 400 });
 
     const storeByUserId = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
     });
 
     if (!storeByUserId) {
@@ -121,7 +126,7 @@ export async function DELETE(
     }
 
     const product = await prisma.product.deleteMany({
-      where: { id: params.productId },
+      where: { id: productId },
     });
 
     return NextResponse.json(product);

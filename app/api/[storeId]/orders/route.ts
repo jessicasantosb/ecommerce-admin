@@ -4,15 +4,16 @@ import prisma from '@/lib/db';
 
 export async function GET(
   req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<{ storeId: string }> },
 ) {
+  const { storeId } = await params;
   try {
-    if (!params.storeId) {
+    if (!storeId) {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
     const orders = await prisma.order.findMany({
-      where: { storeId: params.storeId },
+      where: { storeId: storeId },
     });
 
     return NextResponse.json(orders);

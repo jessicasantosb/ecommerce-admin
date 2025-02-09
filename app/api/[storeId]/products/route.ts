@@ -5,8 +5,10 @@ import prisma from '@/lib/db';
 
 export async function POST(
   req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<{ storeId: string }> },
 ) {
+  const { storeId } = await params;
+
   try {
     const { userId } = await auth();
     const body = await req.json();
@@ -29,12 +31,12 @@ export async function POST(
         return new NextResponse(`${value} is required`, { status: 400 });
     }
 
-    if (!params.storeId) {
+    if (!storeId) {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
     const storeByUserId = await prisma.store.findFirst({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
     });
 
     if (!storeByUserId) {
@@ -50,7 +52,7 @@ export async function POST(
         colorId,
         isFeatured,
         isArchived,
-        storeId: params.storeId,
+        storeId: storeId,
         images: {
           createMany: {
             data: [...images.map((image: { url: string }) => image)],
@@ -68,8 +70,10 @@ export async function POST(
 
 export async function GET(
   req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<{ storeId: string }> },
 ) {
+  const { storeId } = await params;
+
   try {
     const { searchParams } = new URL(req.url);
     const categoryId = searchParams.get('categoryId') || undefined;
@@ -77,13 +81,13 @@ export async function GET(
     const sizeId = searchParams.get('sizeId') || undefined;
     const isFeatured = searchParams.get('isFeatured');
 
-    if (!params.storeId) {
+    if (!storeId) {
       return new NextResponse('Store id is required', { status: 400 });
     }
 
     const products = await prisma.product.findMany({
       where: {
-        storeId: params.storeId,
+        storeId: storeId,
         categoryId,
         colorId,
         sizeId,
