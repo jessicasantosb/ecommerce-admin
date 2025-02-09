@@ -4,8 +4,10 @@ import { NextResponse } from 'next/server';
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<{ storeId: string }> },
 ) {
+  const { storeId } = await params;
+
   try {
     const { userId } = await auth();
     const body = await req.json();
@@ -14,11 +16,11 @@ export async function PATCH(
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
     if (!name) return new NextResponse('Name is required', { status: 400 });
-    if (!params.storeId)
+    if (!storeId)
       return new NextResponse('Store ID is required', { status: 400 });
 
     const store = await prisma.store.updateMany({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
       data: { name },
     });
 
@@ -31,17 +33,19 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<{ storeId: string }> },
 ) {
+  const { storeId } = await params;
+
   try {
     const { userId } = await auth();
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
-    if (!params.storeId)
+    if (!storeId)
       return new NextResponse('Store ID is required', { status: 400 });
 
     const store = await prisma.store.deleteMany({
-      where: { id: params.storeId, userId },
+      where: { id: storeId, userId },
     });
 
     return NextResponse.json(store);
