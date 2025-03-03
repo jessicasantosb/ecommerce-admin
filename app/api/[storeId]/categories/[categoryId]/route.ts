@@ -14,6 +14,7 @@ export async function GET(
 
     const category = await prisma.category.findUnique({
       where: { id: categoryId },
+      include: { billboard: true },
     });
 
     return NextResponse.json(category);
@@ -71,7 +72,7 @@ export async function DELETE(
   { params }: { params: Promise<{ categoryId: string; storeId: string }> },
 ) {
   const { categoryId, storeId } = await params;
-  
+
   try {
     const { userId } = await auth();
 
