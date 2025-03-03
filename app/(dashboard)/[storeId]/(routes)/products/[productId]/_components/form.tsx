@@ -92,14 +92,10 @@ export function ProductForm({
       if (initialData) {
         await axios.patch(
           `/api/${params.storeId}/products/${params.productId}`,
-          {
-            values,
-          },
+          values,
         );
       } else {
-        await axios.post(`/api/${params.storeId}/products`, {
-          values,
-        });
+        await axios.post(`/api/${params.storeId}/products`, values);
       }
       push(`/${params.storeId}/products`);
       toast.success(toastMessage);
@@ -160,7 +156,7 @@ export function ProductForm({
             name='images'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Imagem de fundo</FormLabel>
+                <FormLabel>Imagens</FormLabel>
                 <FormControl>
                   <ImageUpload
                     value={field.value.map((image) => image.url)}

@@ -22,11 +22,11 @@ export async function POST(
       isFeatured,
       isArchived,
       images,
-    } = body.values;
+    } = body;
 
     if (!userId) return new NextResponse('Unauthenticated', { status: 401 });
 
-    for (const value in body.values) {
+    for (const value in body) {
       if (!value)
         return new NextResponse(`${value} is required`, { status: 400 });
     }
