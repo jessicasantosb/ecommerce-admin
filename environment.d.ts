@@ -8,6 +8,8 @@ declare global {
       DATABASE_URL: string;
       DIRECT_URL: string;
       NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: string;
+      STRIPE_API_KEY: string;
+      FRONTEND_STORE_URL: string;
     }
   }
 }
