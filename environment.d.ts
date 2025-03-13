@@ -10,6 +10,7 @@ declare global {
       NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: string;
       STRIPE_API_KEY: string;
       FRONTEND_STORE_URL: string;
+      STRIPE_WEBHOOK_SECRET: string;
     }
   }
 }
