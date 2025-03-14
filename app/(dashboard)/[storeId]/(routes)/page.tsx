@@ -1,5 +1,6 @@
 import { CreditCard, DollarSign } from 'lucide-react';
 
+import { getSalesCount } from '@/actions/get-sale-count';
 import { getTotalRevenue } from '@/actions/get-total-revenue';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heading } from '@/components/ui/heading';
@@ -12,6 +13,7 @@ export default async function DashboardPage(
   const { storeId } = await params;
 
   const totalRevenue = await getTotalRevenue(storeId);
+  const salesCount = await getSalesCount(storeId);
 
   return (
     <main className='flex items-center'>
@@ -40,7 +42,7 @@ export default async function DashboardPage(
               <CreditCard className='size-4 text-muted-foreground' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>+25</div>
+              <div className='text-2xl font-bold'>+{salesCount}</div>
             </CardContent>
           </Card>
 
