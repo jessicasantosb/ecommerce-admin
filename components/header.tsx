@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { Navbar } from '@/components/navbar';
 import { StoreSwitcher } from '@/components/store-switcher';
 import { getStoresByUserId } from '@/lib/store';
+import { ThemeToggle } from './ui/theme-toggle';
 
 export async function Header() {
   const { userId } = await auth();
@@ -17,6 +18,7 @@ export async function Header() {
       <StoreSwitcher items={stores} />
       <Navbar />
       <div className='ml-auto flex items-center space-x-4'>
+        <ThemeToggle />
         <UserButton />
       </div>
     </header>
