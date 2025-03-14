@@ -1,11 +1,17 @@
 import { CreditCard, DollarSign } from 'lucide-react';
 
+import { getTotalRevenue } from '@/actions/get-total-revenue';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { priceFormatter } from '@/lib/utils';
 
-export default async function DashboardPage() {
+export default async function DashboardPage(
+  params: Promise<{ storeId: string }>,
+) {
+  const { storeId } = await params;
+
+  const totalRevenue = await getTotalRevenue(storeId);
 
   return (
     <main className='flex items-center'>
@@ -23,7 +29,7 @@ export default async function DashboardPage() {
             </CardHeader>
             <CardContent>
               <div className='text-2xl font-bold'>
-                {priceFormatter.format(10)}
+                {priceFormatter.format(totalRevenue)}
               </div>
             </CardContent>
           </Card>
