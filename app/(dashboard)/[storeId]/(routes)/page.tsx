@@ -10,9 +10,11 @@ import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { priceFormatter } from '@/lib/utils';
 
-export default async function DashboardPage(
-  params: Promise<{ storeId: string }>,
-) {
+export default async function DashboardPage({
+  params,
+}: {
+  params: Promise<{ storeId: string }>;
+}) {
   const { storeId } = await params;
 
   const totalRevenue = await getTotalRevenue(storeId);
