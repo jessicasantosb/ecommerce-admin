@@ -1,5 +1,6 @@
 import { CreditCard, DollarSign } from 'lucide-react';
 
+import { getGraphRevenue } from '@/actions/get-graph-revenue';
 import { getSalesCount } from '@/actions/get-sale-count';
 import { getStockCount } from '@/actions/get-stock-count';
 import { getTotalRevenue } from '@/actions/get-total-revenue';
@@ -17,6 +18,7 @@ export default async function DashboardPage(
   const totalRevenue = await getTotalRevenue(storeId);
   const salesCount = await getSalesCount(storeId);
   const stockCount = await getStockCount(storeId);
+  const graphRevenue = await getGraphRevenue(storeId);
 
   return (
     <main className='flex items-center'>
@@ -67,7 +69,7 @@ export default async function DashboardPage(
             <CardTitle>Visão Geral</CardTitle>
           </CardHeader>
           <CardContent className='pl-2'>
-            <Overview data={[]}/>
+            <Overview data={graphRevenue} />
           </CardContent>
         </Card>
       </div>
