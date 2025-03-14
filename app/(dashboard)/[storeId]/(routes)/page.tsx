@@ -3,6 +3,7 @@ import { CreditCard, DollarSign } from 'lucide-react';
 import { getSalesCount } from '@/actions/get-sale-count';
 import { getStockCount } from '@/actions/get-stock-count';
 import { getTotalRevenue } from '@/actions/get-total-revenue';
+import { Overview } from '@/components/overview';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
@@ -60,6 +61,15 @@ export default async function DashboardPage(
             </CardContent>
           </Card>
         </div>
+
+        <Card className='col-span-2'>
+          <CardHeader>
+            <CardTitle>Visão Geral</CardTitle>
+          </CardHeader>
+          <CardContent className='pl-2'>
+            <Overview data={[]}/>
+          </CardContent>
+        </Card>
       </div>
     </main>
   );
