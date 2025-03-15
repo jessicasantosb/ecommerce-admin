@@ -1,11 +1,11 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
 import { Geist, Geist_Mono } from 'next/font/google';
 
 import { ModalProvider } from '@/providers/modal-provider';
 import { ToastProvider } from '@/providers/toast-provider';
 
-import { ThemeProvider } from 'next-themes';
 import './globals.css';
 
 const geistSans = Geist({
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang='pt-BR'>
+      <html lang='pt-BR' suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
