@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const event: Stripe.Event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
+      process.env.STRIPE_WEBHOOK_SECRET,
     );
 
     const session = event.data.object as Stripe.Checkout.Session;
