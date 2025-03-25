@@ -1,8 +1,8 @@
 import { getCategories } from '@/lib/category';
-import { getProductById } from '@/lib/product';
-import { ProductForm } from './_components/form';
 import { getColors } from '@/lib/color';
+import { getProductById } from '@/lib/product';
 import { getSizes } from '@/lib/size';
+import { ProductForm } from './_components/form';
 
 export default async function ProductPage({
   params,
@@ -11,10 +11,27 @@ export default async function ProductPage({
 }) {
   const { productId, storeId } = await params;
 
-  const product = await getProductById(productId);
+  const productData = await getProductById(productId);
   const categories = await getCategories(storeId);
   const colors = await getColors(storeId);
   const sizes = await getSizes(storeId);
+
+  const product = productData
+    ? {
+        ...productData,
+        price: Number(productData.price),
+        id: productData.id ?? '',
+        storeId: productData.storeId ?? '',
+        categoryId: productData.categoryId ?? '',
+        name: productData.name ?? '',
+        sizeId: productData.sizeId ?? '',
+        colorId: productData.colorId ?? '',
+        isFeatured: productData.isFeatured ?? false,
+        isArchived: productData.isArchived ?? false,
+        createdAt: productData.createdAt ?? new Date(),
+        updatedAt: productData.updatedAt ?? new Date(),
+      }
+    : null;
 
   return (
     <main className='flex flex-col'>

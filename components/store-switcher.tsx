@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/popover';
 import { useStoreModal } from '@/hooks/use-store-modal';
 import { cn } from '@/lib/utils';
+
 import {
   Command,
   CommandEmpty,
@@ -38,22 +39,20 @@ interface StoreSwitcherProps extends PopoverTriggerProps {
 
 export function StoreSwitcher({ className, items = [] }: StoreSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const storeModal = useStoreModal();
-  const params = useParams();
-  const router = useRouter();
+  const { onOpen } = useStoreModal();
+  const { storeId } = useParams();
+  const { push } = useRouter();
 
   const formattedItems = items.map(({ name, id }) => ({
     label: name,
     value: id,
   }));
 
-  const currentStore = formattedItems.find(
-    ({ value }) => value === params.storeId,
-  );
+  const currentStore = formattedItems.find(({ value }) => value === storeId);
 
   const onStoreSelect = (store: { label: string; value: string }) => {
     setIsOpen(false);
-    router.push(`/${store.value}`);
+    push(`/${store.value}`);
   };
 
   return (
@@ -103,7 +102,7 @@ export function StoreSwitcher({ className, items = [] }: StoreSwitcherProps) {
               <CommandItem
                 onSelect={() => {
                   setIsOpen(false);
-                  storeModal.onOpen();
+                  onOpen();
                 }}>
                 <PlusCircle className='size-5 mr-2' />
                 Criar Loja

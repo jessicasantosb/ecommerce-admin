@@ -37,9 +37,7 @@ import { productFormSchema } from '@/schemas/form-schema';
 
 interface ProductFormProps {
   initialData:
-    | (Product & {
-        images: Image[];
-      })
+    | (Omit<Product, 'price'> & { images: Image[]; price: number })
     | null;
   categories: Category[];
   colors: Color[];
@@ -71,7 +69,8 @@ export function ProductForm({
     defaultValues: initialData
       ? {
           ...initialData,
-          price: parseFloat(String(initialData?.price)),
+          price: Number(initialData.price),
+          images: initialData.images ?? [],
         }
       : {
           name: '',
