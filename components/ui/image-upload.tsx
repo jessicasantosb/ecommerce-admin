@@ -64,7 +64,7 @@ export function ImageUpload({
         {({ open }) => {
           const onClick = () => open();
           return (
-            <Button variant={'secondary'} disabled={disabled} onClick={onClick}>
+            <Button type='button' variant={'secondary'} disabled={disabled} onClick={onClick}>
               <ImagePlus className='size-4 mr-2' />
               Insira uma imagem
             </Button>
