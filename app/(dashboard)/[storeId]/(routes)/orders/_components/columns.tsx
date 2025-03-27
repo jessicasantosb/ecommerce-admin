@@ -17,5 +17,14 @@ export const columns: ColumnDef<OrderColumn>[] = [
   { accessorKey: 'phone', header: 'Contato' },
   { accessorKey: 'address', header: 'Endereço' },
   { accessorKey: 'totalPrice', header: 'Valor Total' },
-  { accessorKey: 'isPaid', header: 'Pago' },
+  {
+    accessorKey: 'isPaid',
+    header: 'Pago',
+    cell: ({ row }) =>
+      row.original.isPaid ? (
+        <p className='text-green-500'>sim</p>
+      ) : (
+        <p className='text-red-500'>não</p>
+      ),
+  },
 ];
