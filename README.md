@@ -1,10 +1,12 @@
 <p align="center">
   <img src="https://img.icons8.com/?size=100&id=MWiBjkuHeMVq&format=png&color=000000" width="99">
   <img src="https://img.icons8.com/?size=100&id=yjSayFwWHyCo&format=png&color=000000" width="99">
+  <img src="https://img.icons8.com/?size=100&id=WOIMvKUjwCRp&format=png&color=000000" width="99">
+  <img src="https://img.icons8.com/?size=100&id=23671&format=png&color=000000" width="99">
 </p>
 <h1 align="center">E-commerce Admin Dashboard</h1>
 <p align="center">
-  Este projeto <code>fullstack</code> foi desenvolvido em Next, Typescript, Clerk e Supabase
+  Este projeto <code>fullstack</code> foi desenvolvido em NextJS, Typescript, Clerk, Supabase e Stripe.
 </p>
 
 ---
@@ -112,6 +114,7 @@ Crie o arquivo `.env` na raiz do projeto e adicione as seguintes variáveis:
 - Clerk
 - Cloudinary
 - Supabase
+- Stripe
 - Prisma
 - React Hook Form
 - Zod
