@@ -37,14 +37,12 @@ Minha principal motivação foi construir uma base sólida para projetos freelan
 
 Certifique-se de ter instalado:
 
-- **[Node.js](https://nodejs.org/)**
-- **[Yarn](https://yarnpkg.com/)**
-- **[Prisma CLI](https://www.prisma.io/docs/concepts/components/prisma-cli)**
-- **[Stripe CLI](https://docs.stripe.com/stripe-cli?locale=pt-BR)**
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=Node.js&logoColor=white)](https://nodejs.org/)  
+[![Yarn](https://img.shields.io/badge/Yarn-2C8EBB?style=flat&logo=Yarn&logoColor=white)](https://yarnpkg.com/)  
+[![Prisma](https://img.shields.io/badge/Prisma-0C344B?style=flat&logo=Prisma&logoColor=white)](https://www.prisma.io/docs/concepts/components/prisma-cli)  
+[![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=flat&logo=Stripe&logoColor=white)](https://docs.stripe.com/stripe-cli?locale=pt-BR)  
 
 ### ⚙️ Instalação
-
-#### [![yarn](https://img.shields.io/badge/Yarn-3775A9.svg?style=flat&logo=Yarn&logoColor=white)](https://github.com/jessicasantosb/ecommerce-admin)
 
 ```sh
 ❯ git clone git@github.com:jessicasantosb/ecommerce-admin.git
