@@ -2,10 +2,11 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 import { getProducts } from '@/lib/product';
-
 import { priceFormatter } from '@/lib/utils';
+
 import { ProductClient } from './_components/client';
-import { ProductColumn } from './_components/columns';
+
+import type { ProductColumn } from './_components/columns';
 
 interface ProductPageProps {
   params: Promise<{ storeId: string }>;

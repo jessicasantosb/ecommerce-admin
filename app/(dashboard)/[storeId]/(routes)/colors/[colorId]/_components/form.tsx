@@ -1,14 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Color } from '@prisma/client';
 import axios from 'axios';
 import { Trash } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { z } from 'zod';
+
 
 import { Button } from '@/components/ui/button';
 import {
@@ -24,6 +23,9 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { AlertModal } from '@/modals/alert-modal';
 import { colorFormSchema } from '@/schemas/form-schema';
+
+import type { Color } from '@prisma/client';
+import type { z } from 'zod';
 
 interface ColorFormProps {
   initialData: Color | null;

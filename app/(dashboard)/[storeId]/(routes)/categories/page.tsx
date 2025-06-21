@@ -4,7 +4,8 @@ import { ptBR } from 'date-fns/locale';
 import { getCategories } from '@/lib/category';
 
 import { CategoryClient } from './_components/client';
-import { CategoryColumn } from './_components/columns';
+
+import type { CategoryColumn } from './_components/columns';
 
 interface CategoriesPageProps {
   params: Promise<{ storeId: string }>;

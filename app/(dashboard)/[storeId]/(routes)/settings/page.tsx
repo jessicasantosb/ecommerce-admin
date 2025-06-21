@@ -2,6 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 
 import { getUserStoreByStoreId } from '@/lib/store';
+
 import { SettingsForm } from './_components/form';
 
 interface SettingsPageProps {

@@ -2,6 +2,7 @@ import { getCategories } from '@/lib/category';
 import { getColors } from '@/lib/color';
 import { getProductById } from '@/lib/product';
 import { getSizes } from '@/lib/size';
+
 import { ProductForm } from './_components/form';
 
 export default async function ProductPage({

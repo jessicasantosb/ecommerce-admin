@@ -1,4 +1,3 @@
-import { Control } from 'react-hook-form';
 
 import {
   FormControl,
@@ -8,6 +7,8 @@ import {
   FormMessage,
 } from './ui/form';
 import { Input } from './ui/input';
+
+import type { Control } from 'react-hook-form';
 
 interface StoreFormFieldProps {
   control: Control<

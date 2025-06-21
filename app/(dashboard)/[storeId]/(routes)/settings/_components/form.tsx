@@ -1,14 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Store } from '@prisma/client';
 import axios from 'axios';
 import { Trash } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { z } from 'zod';
+
 
 import { StoreFormField } from '@/components/store-form-field';
 import { ApiAlert } from '@/components/ui/api-alert';
@@ -19,6 +18,9 @@ import { Separator } from '@/components/ui/separator';
 import { useOrigin } from '@/hooks/use-origin';
 import { AlertModal } from '@/modals/alert-modal';
 import { formSchema } from '@/schemas/form-schema';
+
+import type { Store } from '@prisma/client';
+import type { z } from 'zod';
 
 interface SettingFormProps {
   initialData: Store;

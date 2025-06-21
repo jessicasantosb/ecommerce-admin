@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { Navbar } from '@/components/navbar';
 import { StoreSwitcher } from '@/components/store-switcher';
 import { getStoresByUserId } from '@/lib/store';
+
 import { ThemeToggle } from './ui/theme-toggle';
 
 export async function Header() {

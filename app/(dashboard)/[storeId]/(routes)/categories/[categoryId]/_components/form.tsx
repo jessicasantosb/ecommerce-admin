@@ -1,14 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Billboard, Category } from '@prisma/client';
 import axios from 'axios';
 import { Trash } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { z } from 'zod';
+
 
 import { Button } from '@/components/ui/button';
 import {
@@ -31,6 +30,9 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { AlertModal } from '@/modals/alert-modal';
 import { categoryFormSchema } from '@/schemas/form-schema';
+
+import type { Billboard, Category } from '@prisma/client';
+import type { z } from 'zod';
 
 interface CategoryFormProps {
   initialData: Category | null;

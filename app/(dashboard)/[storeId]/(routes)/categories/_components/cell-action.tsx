@@ -17,7 +17,7 @@ import {
 import { onCopy } from '@/lib/utils';
 import { AlertModal } from '@/modals/alert-modal';
 
-import { CategoryColumn } from './columns';
+import type { CategoryColumn } from './columns';
 
 interface CellActionProps {
   data: CategoryColumn;

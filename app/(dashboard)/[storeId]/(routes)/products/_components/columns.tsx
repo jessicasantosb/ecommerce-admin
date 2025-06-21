@@ -1,8 +1,11 @@
 'use client';
 
+
 import { ColorBadge } from '@/components/color-badge';
-import { ColumnDef } from '@tanstack/react-table';
+
 import { CellAction } from './cell-action';
+
+import type { ColumnDef } from '@tanstack/react-table';
 
 export type ProductColumn = {
   id: string;

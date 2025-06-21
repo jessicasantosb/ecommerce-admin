@@ -1,6 +1,7 @@
-import { getStoreByUserId } from '@/lib/store';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+
+import { getStoreByUserId } from '@/lib/store';
 
 export default async function SetupLayout({
   children,

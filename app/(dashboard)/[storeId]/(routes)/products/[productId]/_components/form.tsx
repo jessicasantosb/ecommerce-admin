@@ -1,14 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Category, Color, Image, Product, Size } from '@prisma/client';
 import axios from 'axios';
 import { Trash } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { z } from 'zod';
+
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -34,6 +33,9 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { AlertModal } from '@/modals/alert-modal';
 import { productFormSchema } from '@/schemas/form-schema';
+
+import type { Category, Color, Image, Product, Size } from '@prisma/client';
+import type { z } from 'zod';
 
 interface ProductFormProps {
   initialData:

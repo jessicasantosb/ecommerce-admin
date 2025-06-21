@@ -14,10 +14,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { AlertModal } from '@/modals/alert-modal';
 import { onCopy } from '@/lib/utils';
+import { AlertModal } from '@/modals/alert-modal';
 
-import { ProductColumn } from './columns';
+import type { ProductColumn } from './columns';
 
 interface CellActionProps {
   data: ProductColumn;

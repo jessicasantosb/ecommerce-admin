@@ -4,7 +4,8 @@ import { ptBR } from 'date-fns/locale';
 import { getBillboards } from '@/lib/billboard';
 
 import { BillboardClient } from './_components/client';
-import { BillboardColumn } from './_components/columns';
+
+import type { BillboardColumn } from './_components/columns';
 
 interface BillboardPageProps {
   params: Promise<{ storeId: string }>;

@@ -17,7 +17,7 @@ import {
 import { onCopy } from '@/lib/utils';
 import { AlertModal } from '@/modals/alert-modal';
 
-import { ColorColumn } from './columns';
+import type { ColorColumn } from './columns';
 
 interface CellActionProps {
   data: ColorColumn;

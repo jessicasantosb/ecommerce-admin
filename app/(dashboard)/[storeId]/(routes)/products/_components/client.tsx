@@ -9,7 +9,9 @@ import { DataTable } from '@/components/ui/data-table';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 
-import { ProductColumn, columns } from './columns';
+import { columns } from './columns';
+
+import type { ProductColumn} from './columns';
 
 interface ProductClientProps {
   data: ProductColumn[];

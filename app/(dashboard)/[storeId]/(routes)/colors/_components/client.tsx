@@ -9,7 +9,9 @@ import { DataTable } from '@/components/ui/data-table';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 
-import { ColorColumn, columns } from './columns';
+import { columns } from './columns';
+
+import type { ColorColumn} from './columns';
 
 interface ColorClientProps {
   data: ColorColumn[];

@@ -3,9 +3,11 @@
 import { Copy, Server } from 'lucide-react';
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Badge, BadgeProps } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { onCopy } from '@/lib/utils';
+
+import type { BadgeProps } from '@/components/ui/badge';
 
 interface ApiAlertProps {
   title: string;

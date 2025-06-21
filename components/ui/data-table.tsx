@@ -1,8 +1,6 @@
 'use client';
 
 import {
-  ColumnDef,
-  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -22,6 +20,10 @@ import {
 
 import { Button } from './button';
 import { Input } from './input';
+
+import type {
+  ColumnDef,
+  ColumnFiltersState} from '@tanstack/react-table';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

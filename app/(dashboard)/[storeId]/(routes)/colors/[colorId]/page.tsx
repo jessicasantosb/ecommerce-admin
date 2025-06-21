@@ -1,4 +1,5 @@
 import { getColorById } from '@/lib/color';
+
 import { ColorForm } from './_components/form';
 
 export default async function ColorPage({

@@ -1,6 +1,6 @@
+import { getBillboards } from '@/lib/billboard';
 import { getCategoryById } from '@/lib/category';
 
-import { getBillboards } from '@/lib/billboard';
 import { CategoryForm } from './_components/form';
 
 export default async function CategoryPage({

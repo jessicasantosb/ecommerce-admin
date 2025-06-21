@@ -17,7 +17,7 @@ import {
 import { onCopy } from '@/lib/utils';
 import { AlertModal } from '@/modals/alert-modal';
 
-import { SizeColumn } from './columns';
+import type { SizeColumn } from './columns';
 
 interface CellActionProps {
   data: SizeColumn;

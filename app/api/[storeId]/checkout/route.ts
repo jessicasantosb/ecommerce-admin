@@ -1,8 +1,10 @@
-import prisma from '@/lib/db';
 import { NextResponse } from 'next/server';
-import Stripe from 'stripe';
 
+
+import prisma from '@/lib/db';
 import { stripe } from '@/lib/stripe';
+
+import type Stripe from 'stripe';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',

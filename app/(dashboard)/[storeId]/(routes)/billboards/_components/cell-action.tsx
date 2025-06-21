@@ -17,7 +17,7 @@ import {
 import { onCopy } from '@/lib/utils';
 import { AlertModal } from '@/modals/alert-modal';
 
-import { BillboardColumn } from './columns';
+import type { BillboardColumn } from './columns';
 
 interface CellActionProps {
   data: BillboardColumn;

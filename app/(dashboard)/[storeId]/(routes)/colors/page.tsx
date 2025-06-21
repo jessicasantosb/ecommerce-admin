@@ -4,7 +4,8 @@ import { ptBR } from 'date-fns/locale';
 import { getColors } from '@/lib/color';
 
 import { ColorClient } from './_components/client';
-import { ColorColumn } from './_components/columns';
+
+import type { ColorColumn } from './_components/columns';
 
 interface ColorPageProps {
   params: Promise<{ storeId: string }>;

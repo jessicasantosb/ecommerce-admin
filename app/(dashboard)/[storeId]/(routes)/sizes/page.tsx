@@ -4,7 +4,8 @@ import { ptBR } from 'date-fns/locale';
 import { getSizes } from '@/lib/size';
 
 import { SizeClient } from './_components/client';
-import { SizeColumn } from './_components/columns';
+
+import type { SizeColumn } from './_components/columns';
 
 interface SizePageProps {
   params: Promise<{ storeId: string }>;

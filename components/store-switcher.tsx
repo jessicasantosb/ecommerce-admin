@@ -1,6 +1,5 @@
 'use client';
 
-import { Store } from '@prisma/client';
 import {
   Check,
   ChevronsUpDown,
@@ -28,6 +27,8 @@ import {
   CommandList,
   CommandSeparator,
 } from './ui/command';
+
+import type { Store } from '@prisma/client';
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
   typeof PopoverTrigger

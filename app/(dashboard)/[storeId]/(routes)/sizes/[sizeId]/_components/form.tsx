@@ -1,14 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Size } from '@prisma/client';
 import axios from 'axios';
 import { Trash } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { z } from 'zod';
+
 
 import { Button } from '@/components/ui/button';
 import {
@@ -24,6 +23,9 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { AlertModal } from '@/modals/alert-modal';
 import { sizeFormSchema } from '@/schemas/form-schema';
+
+import type { Size } from '@prisma/client';
+import type { z } from 'zod';
 
 interface SizeFormProps {
   initialData: Size | null;

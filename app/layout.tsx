@@ -1,10 +1,11 @@
 import { ClerkProvider } from '@clerk/nextjs';
-import type { Metadata } from 'next';
-import { ThemeProvider } from 'next-themes';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { ThemeProvider } from 'next-themes';
 
 import { ModalProvider } from '@/providers/modal-provider';
 import { ToastProvider } from '@/providers/toast-provider';
+
+import type { Metadata } from 'next';
 
 import './globals.css';
 
